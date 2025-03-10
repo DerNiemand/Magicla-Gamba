@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://q3h131jpfy87"]
+
+[ext_resource type="Script" path="res://scripts/Cards/CardImporter.cs" id="1_cglmb"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_cglmb")

@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "Sem3Proj": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files (x86)\\Godot-.NET\\Godot_v4.3-stable_mono_win64\\Godot_v4.3-stable_mono_win64.exe",
+      "workingDirectory": ".",
+      "nativeDebugging": true
+    },
+    "Profile 2": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files (x86)\\Godot Engine -.NET\\Godot_v4.3-stable_mono_win64\\Godot_v4.3-stable_mono_win64.exe",
+      "workingDirectory": ".",
+      "nativeDebugging": true
+    }
+  }
+}

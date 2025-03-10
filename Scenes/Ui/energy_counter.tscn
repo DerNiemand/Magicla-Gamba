@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://chyid2imehbe4"]
+
+[ext_resource type="Script" path="res://scripts/Ui/EnergyCounter.cs" id="1_4i3sf"]
+[ext_resource type="Texture2D" uid="uid://0x1naobxjhwn" path="res://Art/Cards/Energies/universal.png" id="1_8jt8f"]
+[ext_resource type="Texture2D" uid="uid://dk1ltdw5w6nrl" path="res://Art/Cards/Energies/spell.png" id="2_72s15"]
+[ext_resource type="Texture2D" uid="uid://hw61ilq0mulh" path="res://Art/Cards/Energies/summon.png" id="3_8nx3y"]
+[ext_resource type="Texture2D" uid="uid://c3llft37xc8te" path="res://Art/Cards/Energies/support.png" id="4_26v8r"]
+
+[node name="EnergyCounter" type="HBoxContainer" node_paths=PackedStringArray("universalEnergiesIcon", "spellEnergiesIcon", "summonEnergiesIcon", "specialEnergiesIcon")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 58.0
+grow_vertical = 0
+script = ExtResource("1_4i3sf")
+universalEnergiesIcon = NodePath("UniversalEnergy")
+spellEnergiesIcon = NodePath("SpellEnergy")
+summonEnergiesIcon = NodePath("SummonEnergy")
+specialEnergiesIcon = NodePath("SpecialEnergy")
+iconSize = 64
+
+[node name="UniversalEnergy" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_8jt8f")
+stretch_mode = 1
+
+[node name="SpellEnergy" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_72s15")
+stretch_mode = 1
+
+[node name="SummonEnergy" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_8nx3y")
+stretch_mode = 1
+
+[node name="SpecialEnergy" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("4_26v8r")
+stretch_mode = 1

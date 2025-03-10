@@ -1,0 +1,333 @@
+[gd_scene load_steps=16 format=3 uid="uid://cbn5ije2nctgs"]
+
+[ext_resource type="Texture2D" uid="uid://bm4tcbthxu873" path="res://Art/Ui/ui_name_plate.png" id="1_iwm8i"]
+[ext_resource type="Script" path="res://scripts/Ui/BattleUi.cs" id="1_ua70k"]
+[ext_resource type="Texture2D" uid="uid://cu3vrl288udi1" path="res://Art/Ui/ui_name_plate_pressed.png" id="2_5h7jn"]
+[ext_resource type="Script" path="res://scripts/Ui/CardActionUi.cs" id="2_rt2vo"]
+[ext_resource type="Texture2D" uid="uid://cym8tgk1ooalw" path="res://Art/Ui/ui_name_plate_hover.png" id="3_rbhap"]
+[ext_resource type="Script" path="res://scripts/Ui/EndScreen.cs" id="6_21uvr"]
+[ext_resource type="Script" path="res://scripts/Ui/InspectUi.cs" id="6_kft5b"]
+[ext_resource type="Script" path="res://scripts/Ui/CostCounterUI.cs" id="6_m21jv"]
+[ext_resource type="Texture2D" uid="uid://ol3fns08dn6p" path="res://Art/Ui/victory.png" id="7_8gl7p"]
+[ext_resource type="Texture2D" uid="uid://r0obld3cau" path="res://Art/Ui/ui_hostjoin_button.png" id="7_c4tom"]
+[ext_resource type="SpriteFrames" uid="uid://dtx5gmlftfi5s" path="res://Cards/energy_symbols.tres" id="7_tob84"]
+[ext_resource type="Texture2D" uid="uid://bancdxesibjiv" path="res://Art/Ui/defeat.png" id="8_ymxw4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c13pm"]
+font_size = 40
+font_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1eur0"]
+font_size = 34
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_abtix"]
+font_size = 34
+font_color = Color(0, 0, 0, 1)
+
+[node name="BattleUI" type="Control" node_paths=PackedStringArray("cardActionUi", "inspectUi")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ua70k")
+cardActionUi = NodePath("CardActionUI")
+inspectUi = NodePath("InspectUI")
+
+[node name="CardActionUI" type="HBoxContainer" parent="." node_paths=PackedStringArray("cardContainer", "abilityButton", "abilityDescriptionLabel", "moveToActiveButton", "costCounter")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_rt2vo")
+cardContainer = NodePath("CardContainer")
+abilityButton = NodePath("VBoxContainer/AbbilityButton")
+abilityDescriptionLabel = NodePath("VBoxContainer/AbilityBox/Label")
+moveToActiveButton = NodePath("VBoxContainer/MoveToActiveCardButton")
+restingCardSize = Vector2i(608, 836)
+costCounter = NodePath("VBoxContainer/AbilityCostBox/CostCounter")
+
+[node name="CardContainer" type="CenterContainer" parent="CardActionUI"]
+custom_minimum_size = Vector2(608, 836)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CardActionUI/CardContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardActionUI"]
+layout_mode = 2
+
+[node name="AttackButton" type="TextureButton" parent="CardActionUI/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_iwm8i")
+texture_pressed = ExtResource("2_5h7jn")
+texture_hover = ExtResource("3_rbhap")
+
+[node name="Label" type="Label" parent="CardActionUI/VBoxContainer/AttackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Attack"
+label_settings = SubResource("LabelSettings_c13pm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AbbilityButton" type="TextureButton" parent="CardActionUI/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_iwm8i")
+texture_pressed = ExtResource("2_5h7jn")
+texture_hover = ExtResource("3_rbhap")
+
+[node name="Label" type="Label" parent="CardActionUI/VBoxContainer/AbbilityButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_c13pm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AbilityCostBox" type="NinePatchRect" parent="CardActionUI/VBoxContainer"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+texture = ExtResource("1_iwm8i")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="CostCounter" type="TextureRect" parent="CardActionUI/VBoxContainer/AbilityCostBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 1
+script = ExtResource("6_m21jv")
+EnergyIcons = ExtResource("7_tob84")
+iconSize = 64
+
+[node name="AbilityBox" type="NinePatchRect" parent="CardActionUI/VBoxContainer"]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 2
+texture = ExtResource("1_iwm8i")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="CardActionUI/VBoxContainer/AbilityBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_1eur0")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MoveToActiveCardButton" type="TextureButton" parent="CardActionUI/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_iwm8i")
+texture_pressed = ExtResource("2_5h7jn")
+texture_hover = ExtResource("3_rbhap")
+
+[node name="Label" type="Label" parent="CardActionUI/VBoxContainer/MoveToActiveCardButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Make Active"
+label_settings = SubResource("LabelSettings_c13pm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="CardActionUI/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_iwm8i")
+texture_pressed = ExtResource("2_5h7jn")
+texture_hover = ExtResource("3_rbhap")
+
+[node name="Label" type="Label" parent="CardActionUI/VBoxContainer/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_c13pm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InspectUI" type="HBoxContainer" parent="." node_paths=PackedStringArray("cardContainer", "AbilityNameLabel", "abilityDescriptionLabel", "costCounter")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_kft5b")
+cardContainer = NodePath("CardContainer")
+AbilityNameLabel = NodePath("VBoxContainer/AbbilityName/Label")
+abilityDescriptionLabel = NodePath("VBoxContainer/AbilityBox/Label")
+restingCardSize = Vector2i(608, 836)
+costCounter = NodePath("VBoxContainer/AbilityCostBox/CostCounter")
+
+[node name="CardContainer" type="CenterContainer" parent="InspectUI"]
+custom_minimum_size = Vector2(608, 836)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InspectUI"]
+layout_mode = 2
+
+[node name="AbbilityName" type="TextureRect" parent="InspectUI/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_iwm8i")
+
+[node name="Label" type="Label" parent="InspectUI/VBoxContainer/AbbilityName"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_c13pm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AbilityCostBox" type="NinePatchRect" parent="InspectUI/VBoxContainer"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+texture = ExtResource("1_iwm8i")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="CostCounter" type="TextureRect" parent="InspectUI/VBoxContainer/AbilityCostBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 1
+script = ExtResource("6_m21jv")
+EnergyIcons = ExtResource("7_tob84")
+iconSize = 64
+
+[node name="AbilityBox" type="NinePatchRect" parent="InspectUI/VBoxContainer"]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 2
+texture = ExtResource("1_iwm8i")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="InspectUI/VBoxContainer/AbilityBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_abtix")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="BackButton" type="TextureButton" parent="InspectUI/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_iwm8i")
+texture_pressed = ExtResource("2_5h7jn")
+texture_hover = ExtResource("3_rbhap")
+
+[node name="Label" type="Label" parent="InspectUI/VBoxContainer/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_c13pm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndScreen" type="CenterContainer" parent="." node_paths=PackedStringArray("victoryUi", "defeatUi")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_21uvr")
+victoryUi = [NodePath("WinScreen")]
+defeatUi = [NodePath("LooseScreen")]
+
+[node name="ColorRect" type="ColorRect" parent="EndScreen"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+color = Color(0, 0, 0, 0.333333)
+
+[node name="UiTextBox" type="NinePatchRect" parent="EndScreen"]
+custom_minimum_size = Vector2(720, 405)
+layout_mode = 2
+texture = ExtResource("7_c4tom")
+patch_margin_left = 46
+patch_margin_top = 46
+patch_margin_right = 46
+patch_margin_bottom = 46
+
+[node name="WinScreen" type="TextureRect" parent="EndScreen"]
+visible = false
+layout_mode = 2
+texture = ExtResource("7_8gl7p")
+
+[node name="LooseScreen" type="TextureRect" parent="EndScreen"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_ymxw4")
+
+[connection signal="pressed" from="CardActionUI/VBoxContainer/AttackButton" to="CardActionUI" method="_OnAttackButtonPressed"]
+[connection signal="pressed" from="CardActionUI/VBoxContainer/AbbilityButton" to="CardActionUI" method="_OnAbilityButtonPressed"]
+[connection signal="pressed" from="CardActionUI/VBoxContainer/MoveToActiveCardButton" to="CardActionUI" method="_OnMoveToActiveCardButtonPressed"]
+[connection signal="pressed" from="CardActionUI/VBoxContainer/BackButton" to="CardActionUI" method="_OnBackButtonPressed"]
+[connection signal="pressed" from="InspectUI/VBoxContainer/BackButton" to="InspectUI" method="_OnBackButtonPressed"]

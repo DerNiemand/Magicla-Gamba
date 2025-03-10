@@ -1,0 +1,41 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://dtx5gmlftfi5s"]
+
+[ext_resource type="Texture2D" uid="uid://c3llft37xc8te" path="res://Art/Cards/Energies/support.png" id="1_2xr7a"]
+[ext_resource type="Texture2D" uid="uid://dk1ltdw5w6nrl" path="res://Art/Cards/Energies/spell.png" id="2_qpxga"]
+[ext_resource type="Texture2D" uid="uid://hw61ilq0mulh" path="res://Art/Cards/Energies/summon.png" id="3_b2t6n"]
+[ext_resource type="Texture2D" uid="uid://0x1naobxjhwn" path="res://Art/Cards/Energies/universal.png" id="4_q0bub"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2xr7a")
+}],
+"loop": true,
+"name": &"specialEnergy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qpxga")
+}],
+"loop": true,
+"name": &"spellEnergy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_b2t6n")
+}],
+"loop": true,
+"name": &"summonEnergy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_q0bub")
+}],
+"loop": true,
+"name": &"universalEnergy",
+"speed": 5.0
+}]

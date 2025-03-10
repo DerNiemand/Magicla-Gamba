@@ -1,0 +1,405 @@
+[gd_scene load_steps=18 format=3 uid="uid://bqdear5blr0re"]
+
+[ext_resource type="Script" path="res://scripts/Proxies/GameProxy.cs" id="1_as2c7"]
+[ext_resource type="PackedScene" uid="uid://6fquk2suuclu" path="res://Cards/base_card.tscn" id="2_1ugnn"]
+[ext_resource type="Texture2D" uid="uid://denapxmi2vrcf" path="res://Art/Board/board.png" id="2_y4jnm"]
+[ext_resource type="Script" path="res://scripts/Proxies/HandCardProxy.cs" id="3_5mnj7"]
+[ext_resource type="Script" path="res://scripts/Proxies/ActiveCardProxy.cs" id="3_fve8j"]
+[ext_resource type="Texture2D" uid="uid://bqetjgxk5hwej" path="res://Art/Ui/ui_turn_pointer.png" id="3_ne7qd"]
+[ext_resource type="PackedScene" uid="uid://c2fnok11bsf8b" path="res://Cards/energy_card.tscn" id="3_sr1te"]
+[ext_resource type="Texture2D" uid="uid://bg2hl4tq7uvvk" path="res://Art/Ui/ui_turn_pointer_enemy.png" id="4_cjfrq"]
+[ext_resource type="Script" path="res://scripts/Proxies/BenchCardProxy.cs" id="4_oyt6j"]
+[ext_resource type="Script" path="res://scripts/Proxies/SpellPlayAreaProxy.cs" id="5_r8dya"]
+[ext_resource type="Texture2D" uid="uid://b6cdxhhuj7t6h" path="res://icon.svg" id="6_ah67g"]
+[ext_resource type="Texture2D" uid="uid://x8a2h7err7xq" path="res://Art/Cards/Backgrounds/shirin_deck_back_card.png" id="8_askof"]
+[ext_resource type="Script" path="res://scripts/Proxies/EnemyCardProxy.cs" id="9_ly85s"]
+[ext_resource type="PackedScene" uid="uid://cbn5ije2nctgs" path="res://Scenes/Ui/battle_ui.tscn" id="12_f3mpm"]
+[ext_resource type="PackedScene" uid="uid://chyid2imehbe4" path="res://Scenes/Ui/energy_counter.tscn" id="12_icx6m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fmvbq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_11sti"]
+
+[node name="Board1" type="Control" node_paths=PackedStringArray("endScreen", "energyCounter")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_as2c7")
+cardScene = ExtResource("2_1ugnn")
+energyCardScene = ExtResource("3_sr1te")
+endScreen = NodePath("BattleUI/EndScreen")
+energyCounter = NodePath("EnergyCounter")
+
+[node name="BoardTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_y4jnm")
+
+[node name="TurnEndButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -42.5
+offset_right = 85.0
+offset_bottom = 42.5
+grow_vertical = 2
+texture_normal = ExtResource("3_ne7qd")
+texture_disabled = ExtResource("4_cjfrq")
+
+[node name="CardPiles" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayerDeck" type="CenterContainer" parent="CardPiles"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.828
+anchor_top = 1.0
+anchor_right = 0.828
+anchor_bottom = 1.0
+offset_left = -74.0
+offset_top = -149.0
+offset_right = 74.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="CardPiles/PlayerDeck"]
+custom_minimum_size = Vector2(170, 234)
+layout_mode = 2
+texture = ExtResource("8_askof")
+expand_mode = 5
+
+[node name="PlayerDiscard" type="CenterContainer" parent="CardPiles"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.837
+anchor_right = 1.0
+anchor_bottom = 0.837
+offset_left = -60.0
+offset_top = -205.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="EnemyDeck" type="CenterContainer" parent="CardPiles"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.827
+anchor_top = 0.13
+anchor_right = 0.827
+anchor_bottom = 0.13
+offset_left = -74.0
+offset_top = -205.0
+offset_right = 74.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="CardPiles/EnemyDeck"]
+custom_minimum_size = Vector2(170, 234)
+layout_mode = 2
+texture = ExtResource("8_askof")
+expand_mode = 5
+flip_h = true
+flip_v = true
+
+[node name="EnemyDiscard" type="CenterContainer" parent="CardPiles"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.359
+anchor_right = 1.0
+anchor_bottom = 0.359
+offset_left = -60.0
+offset_top = -205.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ActiveCard" type="CenterContainer" parent="." node_paths=PackedStringArray("battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.507
+anchor_top = 0.76
+anchor_right = 0.507
+anchor_bottom = 0.76
+offset_left = -85.0
+offset_top = -240.0
+offset_right = 85.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_fve8j")
+battleUi = NodePath("../BattleUI")
+restingCardSize = Vector2i(170, 234)
+
+[node name="BenchCards" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BenchCard" type="CenterContainer" parent="BenchCards" node_paths=PackedStringArray("battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.277
+anchor_top = 0.757
+anchor_right = 0.277
+anchor_bottom = 0.757
+offset_left = -74.0
+offset_top = -205.0
+offset_right = 74.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("4_oyt6j")
+battleUi = NodePath("../../BattleUI")
+restingCardSize = Vector2i(148, 205)
+
+[node name="BenchCard2" type="CenterContainer" parent="BenchCards" node_paths=PackedStringArray("battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.384
+anchor_top = 0.757
+anchor_right = 0.384
+anchor_bottom = 0.757
+offset_left = -74.0
+offset_top = -205.0
+offset_right = 74.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("4_oyt6j")
+battleUi = NodePath("../../BattleUI")
+restingCardSize = Vector2i(148, 205)
+
+[node name="BenchCard3" type="CenterContainer" parent="BenchCards" node_paths=PackedStringArray("battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.621
+anchor_top = 0.757
+anchor_right = 0.621
+anchor_bottom = 0.757
+offset_left = -74.0
+offset_top = -205.0
+offset_right = 74.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("4_oyt6j")
+battleUi = NodePath("../../BattleUI")
+restingCardSize = Vector2i(148, 205)
+
+[node name="BenchCard4" type="CenterContainer" parent="BenchCards" node_paths=PackedStringArray("battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.729
+anchor_top = 0.757
+anchor_right = 0.729
+anchor_bottom = 0.757
+offset_left = -74.0
+offset_top = -205.0
+offset_right = 74.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("4_oyt6j")
+battleUi = NodePath("../../BattleUI")
+restingCardSize = Vector2i(148, 205)
+
+[node name="HandCards" type="HBoxContainer" parent="." node_paths=PackedStringArray("spellPlayArea", "battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = ExtResource("3_5mnj7")
+restingBottomPosition = 120
+focusBottomPosition = 20
+restingCardSize = Vector2i(148, 205)
+cardScene = ExtResource("2_1ugnn")
+spellPlayArea = NodePath("../SpellPlayArea")
+battleUi = NodePath("../BattleUI")
+
+[node name="EnemyCards" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ActiveCard" type="CenterContainer" parent="EnemyCards" node_paths=PackedStringArray("battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.507
+anchor_top = 0.24
+anchor_right = 0.507
+anchor_bottom = 0.24
+offset_left = -85.0
+offset_right = 85.0
+offset_bottom = 240.0
+grow_horizontal = 2
+script = ExtResource("9_ly85s")
+battleUi = NodePath("../../BattleUI")
+
+[node name="BenchCards" type="Control" parent="EnemyCards"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BenchCard" type="CenterContainer" parent="EnemyCards/BenchCards" node_paths=PackedStringArray("battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.277
+anchor_top = 0.243
+anchor_right = 0.277
+anchor_bottom = 0.243
+offset_left = -74.0
+offset_right = 74.0
+offset_bottom = 205.0
+grow_horizontal = 2
+script = ExtResource("9_ly85s")
+battleUi = NodePath("../../../BattleUI")
+
+[node name="BenchCard2" type="CenterContainer" parent="EnemyCards/BenchCards" node_paths=PackedStringArray("battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.384
+anchor_top = 0.243
+anchor_right = 0.384
+anchor_bottom = 0.243
+offset_left = -74.0
+offset_right = 74.0
+offset_bottom = 205.0
+grow_horizontal = 2
+script = ExtResource("9_ly85s")
+battleUi = NodePath("../../../BattleUI")
+
+[node name="BenchCard3" type="CenterContainer" parent="EnemyCards/BenchCards" node_paths=PackedStringArray("battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.621
+anchor_top = 0.243
+anchor_right = 0.621
+anchor_bottom = 0.243
+offset_left = -74.0
+offset_right = 74.0
+offset_bottom = 205.0
+grow_horizontal = 2
+script = ExtResource("9_ly85s")
+battleUi = NodePath("../../../BattleUI")
+
+[node name="BenchCard4" type="CenterContainer" parent="EnemyCards/BenchCards" node_paths=PackedStringArray("battleUi")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.729
+anchor_top = 0.243
+anchor_right = 0.729
+anchor_bottom = 0.243
+offset_left = -74.0
+offset_right = 74.0
+offset_bottom = 205.0
+grow_horizontal = 2
+script = ExtResource("9_ly85s")
+battleUi = NodePath("../../../BattleUI")
+
+[node name="SpellPlayArea" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(1500, 700)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -750.0
+offset_top = -350.0
+offset_right = 750.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("5_r8dya")
+
+[node name="EnergyCounter" parent="." instance=ExtResource("12_icx6m")]
+layout_mode = 1
+offset_top = -64.0
+offset_right = 268.0
+
+[node name="EnergyCards" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+visible = false
+position = Vector2(303, 1036)
+scale = Vector2(260, 85)
+mesh = SubResource("BoxMesh_fmvbq")
+texture = ExtResource("6_ah67g")
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="."]
+visible = false
+position = Vector2(1877, 44)
+scale = Vector2(85, 85)
+mesh = SubResource("BoxMesh_fmvbq")
+texture = ExtResource("6_ah67g")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
+position = Vector2(86, 993)
+scale = Vector2(170, 170)
+mesh = SubResource("SphereMesh_11sti")
+texture = ExtResource("6_ah67g")
+
+[node name="BattleUI" parent="." instance=ExtResource("12_f3mpm")]
+layout_mode = 1
+
+[connection signal="pressed" from="TurnEndButton" to="." method="_OnTurnEndButtonPressed"]
+[connection signal="gui_input" from="ActiveCard" to="ActiveCard" method="_OnGuiInput"]
+[connection signal="gui_input" from="BenchCards/BenchCard" to="BenchCards/BenchCard" method="_OnGuiInput"]
+[connection signal="gui_input" from="BenchCards/BenchCard2" to="BenchCards/BenchCard2" method="_OnGuiInput"]
+[connection signal="gui_input" from="BenchCards/BenchCard3" to="BenchCards/BenchCard3" method="_OnGuiInput"]
+[connection signal="gui_input" from="BenchCards/BenchCard4" to="BenchCards/BenchCard4" method="_OnGuiInput"]
+[connection signal="mouse_entered" from="HandCards" to="HandCards" method="_OnMouseEntered"]
+[connection signal="mouse_exited" from="HandCards" to="HandCards" method="_OnMouseExited"]
+[connection signal="gui_input" from="EnemyCards/ActiveCard" to="EnemyCards/ActiveCard" method="_OnGuiInput"]
+[connection signal="gui_input" from="EnemyCards/BenchCards/BenchCard" to="EnemyCards/BenchCards/BenchCard" method="_OnGuiInput"]
+[connection signal="gui_input" from="EnemyCards/BenchCards/BenchCard2" to="EnemyCards/BenchCards/BenchCard2" method="_OnGuiInput"]
+[connection signal="gui_input" from="EnemyCards/BenchCards/BenchCard3" to="EnemyCards/BenchCards/BenchCard3" method="_OnGuiInput"]
+[connection signal="gui_input" from="EnemyCards/BenchCards/BenchCard4" to="EnemyCards/BenchCards/BenchCard4" method="_OnGuiInput"]

@@ -1,0 +1,12 @@
+Index,Name,Type,Cost,HP,Attack,Retreat,Ability ,AbilityStrength,Ability Cost,Deck,Description
+1,Shirin,Hero,1,25,1,4,HealActive,1,1,Shirin,Heal your Active Card for 1 Hitpoint.
+2,Little Fairy Butterfly,Summon,1,2,1,0,,0,0,Shirin,
+3,Magical Birdie,Summon,2,4,1,2,HealSelf,4,2,Shirin,Heal this Card for 4 Hitpoints.
+4,Sakura Tree,Field,3,1,0,3,HealActive,3,1,Shirin,Heal your Active Card for 3 Hitpoint.
+5,Shroom Guy,Summon,2,2,3,1,,0,0,Shirin,
+6,Wildlife Deer,Summon,3,5,5,3,,0,0,Shirin,
+7,Teleportation,Spell,2,0,0,0,SwitchActive,0,0,Shirin,Switches the Opponents active Card for a different one.
+8,Ghost Hand,Spell,2,0,0,0,RedrawHand,3,0,Shirin,Shuffle the Opponents hand into their deck. They draw 3 Cards.
+9,Magic Shot,Spell,3,0,0,0,Damage,6,0,Shirin,Deal 6 Damage to the Opponents Active Card.
+11,Blooming Petals,Item,3,0,0,0,Heal,5,0,Shirin,Heal your Active Card for 5 Hitpoints.
+12,Tome of Knowledge,Item,2,0,0,0,Draw,2,0,Shirin,Draw 2 Cards.

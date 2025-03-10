@@ -1,0 +1,103 @@
+[gd_scene load_steps=17 format=3 uid="uid://c2fnok11bsf8b"]
+
+[ext_resource type="Script" path="res://scripts/Cards/EnergyCard.cs" id="1_4hj1g"]
+[ext_resource type="SpriteFrames" uid="uid://dtx5gmlftfi5s" path="res://Cards/energy_symbols.tres" id="2_hsjy7"]
+[ext_resource type="Texture2D" uid="uid://bc2tqtmues2v2" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_1.png" id="2_oeba3"]
+[ext_resource type="Texture2D" uid="uid://cjb054y56gcav" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_2.png" id="3_x1ck3"]
+[ext_resource type="Texture2D" uid="uid://bdli8g51pu60c" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_11.png" id="4_gns0p"]
+[ext_resource type="Texture2D" uid="uid://dkccokgrnemj7" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_12.png" id="5_3u87m"]
+[ext_resource type="Texture2D" uid="uid://2lq8po6q1ir5" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_13.png" id="6_kp6ed"]
+[ext_resource type="Texture2D" uid="uid://bw0hhtrpk75ii" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_3.png" id="7_u4y1h"]
+[ext_resource type="Texture2D" uid="uid://dc7ufnorfthwu" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_4.png" id="8_tjrej"]
+[ext_resource type="Texture2D" uid="uid://d02vupg72yuu8" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_5.png" id="9_j12n1"]
+[ext_resource type="Texture2D" uid="uid://caineqkvhaq5q" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_6.png" id="10_wa6sy"]
+[ext_resource type="Texture2D" uid="uid://b87igemyn0wvw" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_7.png" id="11_7iv6x"]
+[ext_resource type="Texture2D" uid="uid://cyl2hdf1ovau0" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_8.png" id="12_mpe2i"]
+[ext_resource type="Texture2D" uid="uid://cmljnlcmsf4a5" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_9.png" id="13_4rq2q"]
+[ext_resource type="Texture2D" uid="uid://cfbrfp8tnd7wm" path="res://Art/Cards/VFX/card_buff_vfx/Card Buff vfx/buff_10.png" id="14_46g0a"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_2jnyc"]
+frames = 13
+frame_0/texture = ExtResource("2_oeba3")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("3_x1ck3")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("7_u4y1h")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("8_tjrej")
+frame_3/duration = 0.1
+frame_4/texture = ExtResource("9_j12n1")
+frame_4/duration = 0.1
+frame_5/texture = ExtResource("10_wa6sy")
+frame_5/duration = 0.1
+frame_6/texture = ExtResource("11_7iv6x")
+frame_6/duration = 0.1
+frame_7/texture = ExtResource("12_mpe2i")
+frame_7/duration = 0.1
+frame_8/texture = ExtResource("13_4rq2q")
+frame_8/duration = 0.1
+frame_9/texture = ExtResource("14_46g0a")
+frame_9/duration = 0.1
+frame_10/texture = ExtResource("4_gns0p")
+frame_10/duration = 0.1
+frame_11/texture = ExtResource("5_3u87m")
+frame_11/duration = 0.1
+frame_12/texture = ExtResource("6_kp6ed")
+frame_12/duration = 0.1
+
+[node name="EnergyCard" type="ColorRect" node_paths=PackedStringArray("draftTurnIndicator", "EnergyIcons")]
+custom_minimum_size = Vector2(150, 200)
+offset_right = 150.0
+offset_bottom = 200.0
+script = ExtResource("1_4hj1g")
+draftTurnIndicator = NodePath("DraftTurnIndicator")
+EnergySymbols = ExtResource("2_hsjy7")
+EnergyIcons = [NodePath("VBoxContainer/TextureRect"), NodePath("VBoxContainer/TextureRect2")]
+
+[node name="EnergiesLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="DraftTurnIndicator" type="TextureRect" parent="."]
+self_modulate = Color(1, 0.156863, 0.25098, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AnimatedTexture_2jnyc")
+expand_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+
+[connection signal="gui_input" from="." to="." method="_OnGuiInput"]
